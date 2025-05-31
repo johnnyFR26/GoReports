@@ -18,5 +18,7 @@ func main() {
 	r.POST("/tasks", handlers.CreateTask)
 	r.GET("/tasks", handlers.GetTasks)
 
+	r.POST("/task_counts/increment", handlers.IncrementTaskCount)
+
 	r.Run(":8080")
 }
