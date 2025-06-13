@@ -3,9 +3,9 @@ package scheduler
 import (
 	"log"
 	"task-reports/internal/database"
-	"task-reports/internal/mailer"
 	"task-reports/internal/models"
 	"task-reports/internal/reporter"
+	"task-reports/internal/resend"
 	"task-reports/internal/utils"
 
 	"github.com/robfig/cron/v3"
@@ -39,9 +39,10 @@ func Start() {
 			return
 		}
 
-		recipients := []string{"gestor@empresa.com", "rh@empresa.com"}
-		if err := mailer.SendEmail(recipients, "Relatório diário de tarefas", html); err != nil {
-			log.Println("Erro ao enviar e-mail:", err)
+		recipients := []string{"johnny.rabelo.cf@gmail.com", "rh@empresa.com"}
+
+		if err := resend.Send(recipients, "Relatório diário de tarefas", html); err != nil {
+			log.Println("Erro ao enviar email:", err)
 		}
 
 		if err := database.DB.Where("date = ?", today).Delete(&models.TaskCount{}).Error; err != nil {
