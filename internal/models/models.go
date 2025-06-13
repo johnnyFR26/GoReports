@@ -18,7 +18,11 @@ type Task struct {
 type TaskCount struct {
 	gorm.Model
 	EmployeeID uint
-	TaskID     uint
-	Count      int
-	Date       string `gorm:"index"`
+	Employee   Employee
+
+	TaskID uint
+	Task   Task
+
+	Count int
+	Date  string `gorm:"index"`
 }

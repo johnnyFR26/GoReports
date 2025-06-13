@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    container_name: go-reports
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./database.db:/root/database.db # Opcional, se quiser persistir local
+    restart: unless-stopped
