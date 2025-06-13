@@ -3,6 +3,8 @@ package main
 import (
 	"task-reports/internal/database"
 	"task-reports/internal/handlers"
+	"task-reports/internal/scheduler"
+	"task-reports/internal/sockets"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +12,13 @@ import (
 func main() {
 	database.Init()
 
+	go sockets.HandleMessages()
+
 	r := gin.Default()
+
+	scheduler.Start()
+
+	r.GET("/ws", sockets.HandleConnections)
 
 	r.POST("/employees", handlers.CreateEmployee)
 	r.GET("/employees", handlers.GetEmployees)
