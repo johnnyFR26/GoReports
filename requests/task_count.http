@@ -1,7 +1,7 @@
-POST http://localhost:8080/task_counts/increment
+POST https://goreports.onrender.com/task_counts/increment
 Content-Type: application/json
 
 {
   "employee_id": 1,
-  "task_id": 2
+  "task_id": 1
 }

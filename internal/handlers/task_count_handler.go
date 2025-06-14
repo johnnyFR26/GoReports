@@ -22,8 +22,8 @@ func IncrementTaskCount(c *gin.Context) {
 	date := utils.TodayString()
 	var taskCount models.TaskCount
 
-	result := database.DB.Where("employee_id = ? AND task_id = ? AND date = ?", input.EmployeeID, input.TaskID, date).
-		First(&taskCount)
+	result := database.DB.Preload("Employee").Preload("Task").
+		First(&taskCount, "employee_id = ? AND task_id = ? AND date = ?", input.EmployeeID, input.TaskID, date)
 
 	if result.Error != nil {
 		taskCount = models.TaskCount{

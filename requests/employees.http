@@ -1,6 +1,10 @@
-POST http://localhost:8080/employees
+POST https://goreports.onrender.com/employees
 Content-Type: application/json
 
 {
-  "name": "João"
+  "name": "Thiago"
 }
+
+###
+
+GET https://goreports.onrender.com/employees
